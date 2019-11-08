@@ -1,0 +1,35 @@
+1. Create product list page : (you can see basics in "productlist.png")
+
+ 
+
+Display product page list with below fields
+
+ - Product Name
+
+ - Product Description
+
+ - Product Image
+
+ - Price
+
+ 
+
+2. Cart Page
+
+- Display selected product.
+
+- Add/Update product quantity
+
+- Update the base price accordingly quantity update
+
+ 
+
+Note:
+
+1.Product sample data you can take into JSON.
+
+2.React,React-redux,redux thunk is compulsory
+
+3.Clicking on add to cart button you will redirect to cart page.
+
+ 

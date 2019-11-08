@@ -1,0 +1,29 @@
+{
+    "product":[
+        {
+            "id": 1,
+            "name": "Pen",
+            "image": "https://www.cultpens.com/imgs/products/cp/950_constW/CR64779~Cross-Classic-Century-Ballpoint-Pen-Brushed-Chrome_P1.jpg",
+            "price": "30"
+        },
+        {
+            "id": 2,
+            "name": "Paper",
+            "image": "https://5.imimg.com/data5/AA/BC/MY-10157822/a3-2f-a4-sublimation-paper-500x500.jpg",
+            "price": "50"
+        },
+        {
+            "id": 3,
+            "name": "Pencil",
+            "image": "https://images-na.ssl-images-amazon.com/images/I/61qd5YbMRIL._SL1500_.jpg",
+            "price": "4"
+        },
+        {
+            "id": 4,
+            "name": "Rubber",
+            "image": "https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/JPEG_1000x1000/SM388400_large_eraser.jpg",
+            "price": "8"
+        }
+        
+    ]
+}
