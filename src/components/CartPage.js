@@ -1,47 +1,48 @@
 import React from 'react';
-import product from '../apis/product';
+import { connect } from 'react-redux';
+import { getProduct} from '../actions';
+
 import {Container, Row, Col} from 'react-bootstrap';
 
+
 class CartPage extends React.Component{
-    state = {product: {}, qty:1, price:0}
+
+    state = { qty:1, price:0}
+
     componentDidMount = () =>{
-        this.getProduct()
+        this.props.getProduct(this.props.match.params.id)
+  
+        console.log(this.inputRef)
+   
     }
 
-    async getProduct(){
-        const response = await product.get(`/product/${this.props.match.params.id}`)
-
-        // console.log(response.data)
-
-        this.setState({product:response.data, price:response.data.price})
-
-    }
     onChange = (e) =>{
         const qty = e.target.name === 'qty'? e.target.value: '0';
-        const netPrice = qty * this.state.product.price;
         
-
+        const price = this.props.product ? this.props.product.price: this.state.price
+        const netPrice = qty * price;
         this.setState({qty:qty, price:netPrice})
-    }
+   }
 
     renderProduct = () =>{
-        if(!this.state.product){
+        if(!this.props.product){
             return(
                 <div>Loading...</div>
             )
         }
         return(
+            
             <Col md={6} style={{ padding:"50px"}}>
-                <label style={{fontSize:"20px"}}>{this.state.product.name}</label> <br></br>
-                <img src={this.state.product.image} width="200px" height="200px"></img><br></br>
-                <label style ={{marginTop:"10px"}}>Qty<input type="text" name="qty" value = {this.state.qty} onChange ={this.onChange} style={{width:"30px"}} required></input></label><br></br>
-                <label>Price<input type="text" name="price" value ={this.state.price} onChange = {this.onChange} style={{width:"50px"}} disabled></input></label>
+                <label style={{fontSize:"20px"}}>{this.props.product.name}</label> <br></br>
+                <img src={this.props.product.image} width="200px" height="200px"></img><br></br>
+                <label style ={{marginTop:"10px"}}>Qty<input type="text" name="qty" value = {this.state.qty} onChange ={this.onChange} style={{width:"30px"}} required autoComplete="off"></input></label><br></br>
+                <label>Price<input type="text" name="price" value = {this.state.price === 0 ? this.props.product.price: this.state.price} onChange = {this.onChange} style={{width:"50px"}} disabled></input></label>
 
             </Col>
         )
     }
     render(){
-        // console.log(this.state.product)
+        
         return(
             <div>
                 <Container>
@@ -57,4 +58,10 @@ class CartPage extends React.Component{
     }
 };
 
-export default CartPage;
+const mapStateToProps = (state, ownProps) =>{
+    return{
+        product: state.product[ownProps.match.params.id]
+    }
+}
+
+export default connect(mapStateToProps, {getProduct})(CartPage);

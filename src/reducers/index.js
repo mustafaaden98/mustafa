@@ -1,5 +1,8 @@
 import {combineReducers} from 'redux';
+import { getProductsReducer } from './getProductsReducer';
+import { getOneProductReducer } from './getOneProductReducer';
 
 export default combineReducers({
-    dummy: () => 10
+    products: getProductsReducer,
+    product: getOneProductReducer
 })

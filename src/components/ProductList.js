@@ -5,7 +5,8 @@ import product from '../apis/product';
 
 import { Container, Row, Col, Button} from 'react-bootstrap';
 import './ProductList.css'
-
+import { getAllProducts } from '../actions';
+import { connect } from 'react-redux';
 
 
 class ProductList extends React.Component{
@@ -13,20 +14,14 @@ class ProductList extends React.Component{
     state = {products: []}
 
     componentDidMount = () =>{
-       this.getAllProducts()
+       this.props.getAllProducts()
+ 
         
     }
 
-    async getAllProducts(){
-        const response = await product.get('/product');
-        // console.log(response)
-
-        this.setState({products: response.data})
-        
-    }
 
     renderList = () =>{
-        return this.state.products.map(product =>{
+        return this.props.products.map(product =>{
             return(
                 
                     <Col key={product.id} md={6} xs={12} style={{padding:"30px"}}><img src ={product.image} width="100px" height="100px"></img><br></br>
@@ -34,16 +29,14 @@ class ProductList extends React.Component{
                     <label>Price:{`${product.price} INR`}</label><br></br>
                     <Link to={`/product/${product.id}`} className="btn add">Add to Cart</Link>
                     </Col>
- 
-                    // {/* <img src = {product.image} width = "100px"></img> <br></br>
-                    // <label>{product.name}</label> */}
+
                 
             )
         })
     }
 
     render(){
-        // console.log(this.props.match.params.id)
+
         return(
             <div>
                 <Container>
@@ -57,5 +50,11 @@ class ProductList extends React.Component{
     }
 };
 
+const mapStateToProps = state =>{
+    
+    return{
+        products: state.products
+    }
+}
 
-export default ProductList;
+export default connect(mapStateToProps, {getAllProducts})(ProductList);
